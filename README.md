@@ -12,7 +12,7 @@ Hexlant 산학 일지
 - openAPI는 말그대로 **open**돼있는 API  
 
 [0](./images/마스크 제고 openAPI.PNG)    
-- dictionary 형태로 값들이 들어있는 걸 확인할 수 있음!!  
+- dictionary 형태로 값들이 들어있는 걸 확인할 수 있음!!
 
 
 2. python 가상환경(virtual environment)  
@@ -28,7 +28,7 @@ window: python -m venv venv
 Set-ExecutionPolicy Unrestricted -Scope CurrentUser
 ```
 
-- 위 command 입력 후 다시 실행. 이걸로 해결안되면 Set-ExecutionPolicy Unrestricted같은 다른 command 사용,,  
+- 위 command 입력 후 다시 실행. 이걸로 해결안되면 Set-ExecutionPolicy Unrestricted같은 다른 command 사용,,
 
 
 3. request library
@@ -36,10 +36,10 @@ Set-ExecutionPolicy Unrestricted -Scope CurrentUser
 
 ```
 pip install requests
-```  
+```
 
-4. example (source code: openAPI_request.py)
-략  
+
+4. example (source code: openAPI_request.py)  
 ```
 r = requests.get('https://8oi9s0nnth.apigw.ntruss.com/corona19-masks/v1/storesByGeo/json')
 rjson = r.json()

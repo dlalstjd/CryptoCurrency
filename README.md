@@ -15,6 +15,8 @@ Hexlant 산학 일지
 - dictionary 형태로 값들이 들어있는 걸 확인할 수 있음!!
 
 
+
+
 2. python 가상환경(virtual environment)  
 - 여러 프로젝트 개발 시 패키지 호환문제 발생,, 이를 해결하기 위해 python에서는 가상환경을 제공해 독립된 공간을 제공  
 
@@ -31,12 +33,16 @@ Set-ExecutionPolicy Unrestricted -Scope CurrentUser
 - 위 command 입력 후 다시 실행. 이걸로 해결안되면 Set-ExecutionPolicy Unrestricted같은 다른 command 사용,,
 
 
+
+
 3. request library
 - python에서 HTTP requeset를 처리할 수 있는 묘듈
 
 ```
 pip install requests
 ```
+
+
 
 
 4. example (source code: openAPI_request.py)  

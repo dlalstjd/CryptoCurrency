@@ -4,7 +4,7 @@ Hexlant 산학 일지
 2020.
 ---
 # 7. 6. Mon : 간단한 request 예제  
-1. openAPI
+# 1. openAPI
 - API(Application Programming Interface)  
 - _**응용프로그램**에서 사용할 수 있도록, **운영체제나 프로그래밍 언어가 제공하는 기술**을 제어할 수 있게 만든 인터페이스_  
 - UI가 사용자와 대상을 연결한다면, API는 서로 다른 프로그램 사이를 연결해주는 다리,,
@@ -17,7 +17,7 @@ Hexlant 산학 일지
 
 
 
-2. python 가상환경(virtual environment)  
+# 2. python 가상환경(virtual environment)  
 - 여러 프로젝트 개발 시 패키지 호환문제 발생,, 이를 해결하기 위해 python에서는 가상환경을 제공해 독립된 공간을 제공  
 
 ```
@@ -35,7 +35,7 @@ Set-ExecutionPolicy Unrestricted -Scope CurrentUser
 
 
 
-3. request library
+# 3. request library
 - python에서 HTTP requeset를 처리할 수 있는 묘듈
 
 ```
@@ -45,7 +45,7 @@ pip install requests
 
 
 
-4. example (source code: openAPI_request.py)  
+# 4. example (source code: openAPI_request.py)  
 ```
 r = requests.get('https://8oi9s0nnth.apigw.ntruss.com/corona19-masks/v1/storesByGeo/json')
 rjson = r.json()

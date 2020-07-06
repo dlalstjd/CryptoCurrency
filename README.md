@@ -11,7 +11,7 @@ Hexlant 산학 일지
 - **응용프로그램**이 우리가 만든 application이라면 **운영체제나 프로그래밍 언어가 제공하는 기술**은 sk 날씨정보나 카카오페이!!
 - openAPI는 말그대로 **open**돼있는 API  
 
-[0](./images/마스크 제고 openAPI.PNG)    
+![0](./images/마스크 제고 openAPI.PNG)    
 - dictionary 형태로 값들이 들어있는 걸 확인할 수 있음!!
 
 

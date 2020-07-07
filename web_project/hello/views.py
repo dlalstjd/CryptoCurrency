@@ -36,5 +36,11 @@ def hello_there(requset, name):
     )
 
 def self_introduction(request):
+    '''
     content = "Hello there, I'm Lee-Minseoung!\n"
     return HttpResponse(content)
+    '''
+    return render(
+        request,
+        'hello/self_introduction.html'
+    )

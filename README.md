@@ -185,5 +185,51 @@ def hello_there(requset, name):
 ---
 6. Template
 - plane한 text web page를 바꿔보자
-- content = "'<h1>'Hello there"!'<h1>'과 같이 HTML을 활용해 직접 전달할 경우 [cross-site scripting(XSS) attacks](https://en.wikipedia.org/wiki/Cross-site_scripting)에 위험
+- content = "`<h1>`Hello there"!`<h1>`과 같이 HTML을 활용해 직접 전달할 경우 [cross-site scripting(XSS) attacks](https://en.wikipedia.org/wiki/Cross-site_scripting)에 위험
 - 따라서 template을 활용하는 것!
+- template은 쉽게 말해 HTML파일임
+<br>
+
+- 먼저 web_project/settings.py에 INSTALLER_APP에 다음을 추가한다.
+```
+'hello'
+```  
+- project가 app을 인식할 수 있도록 추가해주는 것,,
+
+<br>
+
+- hello 폴더에 templates이라는 폴더를 만들고 안에 app과 똑같은 이름('hello')의 서브폴더를 생성한다. ~~convention이란다~~
+
+<br>
+
+- /templates/hello에 hello_there.html 파일 생성
+```
+    <body>
+        <strong>Hello there, {{ name }}!</strong> It's {{ date | date:"l, d F, Y" }} at {{ date | time:"H:i:s" }}
+    </body>
+```
+- 여기서는 2개의 placeholder를 포함. 1개는 name, 다른 1는 date 각각 {{ }}로 묶어 있음!
+- pipe symbol(|)뒤에 값은 [date filter](https://docs.djangoproject.com/en/2.1/ref/templates/builtins/#date), [time filter](https://docs.djangoproject.com/en/2.1/ref/templates/builtins/#time)참고!
+
+<br>
+
+- views.hello_there 수정!!
+```
+def hello_there(requset, name):
+    return render(
+        requset,
+        'hello/hello_there.html',
+        {
+            'name': name,
+            'date': datetime.now()
+        }
+    )
+```  
+- **이전처럼 content를 직접 넘겨줄 필요없음!**
+- render로 request object, template path, 필요한 data를 가져가 template를 load하는 방식,,
+
+<br>
+
+--- 
+7. 참고
+- name에서 `<a%20value%20that%20could%20be%20HTML>`라는 HTML context를 직접 넘겨도 name은 plain text로 표시됨!

@@ -24,3 +24,8 @@ def hello_there(requset, name):
 
     content = "Hello there, " + clean_name + "! It's " + formatted_now
     return HttpResponse(content)
+
+
+def self_introduction(request):
+    content = "Hello there, I'm Lee-Minseoung!\n"
+    return HttpResponse(content)

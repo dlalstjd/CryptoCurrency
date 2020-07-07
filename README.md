@@ -185,5 +185,5 @@ def hello_there(requset, name):
 ---
 6. Template
 - plane한 text web page를 바꿔보자
-- content = ~~~"<h1>Hello there"!<h1>~~~과 같이 HTML을 활용해 직접 전달할 경우 [cross-site scripting(XSS) attacks](https://en.wikipedia.org/wiki/Cross-site_scripting)에 위험
+- content = "'<h1>'Hello there"!'<h1>'과 같이 HTML을 활용해 직접 전달할 경우 [cross-site scripting(XSS) attacks](https://en.wikipedia.org/wiki/Cross-site_scripting)에 위험
 - 따라서 template을 활용하는 것!

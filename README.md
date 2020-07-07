@@ -83,7 +83,7 @@ django-admin startproject web_project .
 - web_project는 project이름,,  
 - command 입력하면 web_project 폴더가 생기는데 안에 python file은 차차 알아볼 것. 일단 작동 방식은 아래와 같음.  
 
-![0](./images/how_django_work.PNG)  
+![0](./images/how_django_work.png)  
 
 - **가상환경이 활성화 돼있는지 꼭 확인할 것!!**  
 ---
@@ -185,5 +185,5 @@ def hello_there(requset, name):
 ---
 6. Template
 - plane한 text web page를 바꿔보자
-- content = "<h1>Hello there"!<h1>과 같이 HTML을 활용해 직접 전달할 경우 [cross-site scripting(XSS) attacks](https://en.wikipedia.org/wiki/Cross-site_scripting)에 위험
+- content = ~~~"<h1>Hello there"!<h1>~~~과 같이 HTML을 활용해 직접 전달할 경우 [cross-site scripting(XSS) attacks](https://en.wikipedia.org/wiki/Cross-site_scripting)에 위험
 - 따라서 template을 활용하는 것!

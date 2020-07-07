@@ -233,3 +233,36 @@ def hello_there(requset, name):
 --- 
 7. 참고
 - name에서 `<a%20value%20that%20could%20be%20HTML>`라는 HTML context를 직접 넘겨도 name은 plain text로 표시됨!
+
+---
+8. 간단한 과제,,
+- 위에서 한 내용을 그대로 따라해서 매우매우 간단간단한 자기소개 page도 만들었다,,
+- hello/urls.py
+```
+ path("introduction", views.self_introduction, name="self_introduction")
+```
+- hello/views.py
+```
+def self_introduction(request):
+    '''
+    content = "Hello there, I'm Lee-Minseoung!\n"
+    return HttpResponse(content)
+    '''
+    return render(
+        request,
+        'hello/self_introduction.html'
+    )
+```
+- templates/hello/self_introduction.html
+```
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Hello, Django</title>
+    </head>
+    <body>
+        <strong>Hello there!</strong> I'm Lee-Minseoung
+    </body>
+</html>
+```

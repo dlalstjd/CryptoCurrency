@@ -10,6 +10,7 @@ def home(request):
 
 
 def hello_there(requset, name):
+    '''
     now = datetime.now()
     formatted_now = now.strftime("%A, %d %B, %Y at %X")
 
@@ -24,7 +25,15 @@ def hello_there(requset, name):
 
     content = "Hello there, " + clean_name + "! It's " + formatted_now
     return HttpResponse(content)
-
+    '''
+    return render(
+        requset,
+        'hello/hello_there.html',
+        {
+            'name': name,
+            'date': datetime.now()
+        }
+    )
 
 def self_introduction(request):
     content = "Hello there, I'm Lee-Minseoung!\n"

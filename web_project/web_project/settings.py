@@ -37,6 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    
+    # make sure the project knows about the app so it can handle templateing
+    'hello'
 ]
 
 MIDDLEWARE = [

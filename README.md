@@ -74,7 +74,7 @@ python -m pip install django
 ```
 ---
 2. Django Project 생성
-- 아래 command로 project 생성
+- 아래 command로 project 생성  
 '''  
 django-admin startproject web_project .
 '''
@@ -163,7 +163,7 @@ def home(request):
 path("hello/<name>", views.hello_there, name="hello_there")
 ```
 - route에서 hello/뒤에 name을 string 변수로 받아와 route를 정의한다.
-- 즉 http://127.0.0.1:8000/hello/_name_ 으로 route 정의
+- 즉 `http://127.0.0.1:8000/hello/`*name* 으로 route 정의
 - **route는 case sensitive!!**  
 
 - 여기서 name을 어디서 받아오는 건지 약간 헷갈렸으나 주소값 입력에서 hello/뒤에 붙은 값을 name이라는 변수로 받아오는 것!

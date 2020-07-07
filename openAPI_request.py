@@ -5,7 +5,7 @@ r = requests.get('https://8oi9s0nnth.apigw.ntruss.com/corona19-masks/v1/storesBy
 rjson = r.json()
 
 #print(rjson)
-#print(rjson['stores'][0]['addr'])
+#print(rjson['stores'][0]['addr']
 
 stores = rjson['stores']
 

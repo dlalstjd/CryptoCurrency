@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+       <meta charset="utf-8"/>
+        <title>{% block title %}{% endblock %}</title>
+        {% load static %}
+        <link rel="stylesheet" type="text/css" href="{% static 'notice/site.css' %}"/>
+    </head>
+
+    <body>
+    <!--navigation bar-->
+    <div class="navbar">
+        <a href="{% url 'upbit' %}" class="navbar-brand">Upbit</a>
+        <a href="{% url 'empty1' %}" class="navbar-item">Empty1</a>
+        <a href="{% url 'empty2' %}" class="navbar-item">Empty2</a>
+        <a href="{% url 'empty3' %}" class="navbar-item">Empty3</a>
+    </div>
+    
+    <!--body content-->
+    <div class="body-content">
+        {% block content %}
+        {% endblock %}
+        <hr/>
+        <footer>
+            <p>© 2020</p>
+        </footer>
+    </div>
+    </body>
+</html>

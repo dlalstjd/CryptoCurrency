@@ -1,0 +1,26 @@
+{% extends "notice/layout.html" %}
+{% block title %}
+    Home
+{% endblock %}
+{% block content %}
+    <h2>Upbit Notices</h2>
+
+    {% if notice_list %}
+        <table class="notice_list">
+            <tbody>
+            {% for notice in notice_list %}
+                <tr>
+                    <td>
+                        {{ notice.notice }}
+                    </td>
+                    <td>
+                        {{ notice.date }}
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No notice have been noticed.</p>
+    {% endif %}
+{% endblock %}

@@ -266,3 +266,22 @@ def self_introduction(request):
     </body>
 </html>
 ```
+---
+# 7. 8. Wen : Django Project 마무리
+1. static files  
+- pieces of content that web app returns ex)이미지, JavaScript, CSS  
+- 더 참고할 [자료](https://docs.djangoproject.com/en/2.1/howto/static-files/)  
+- web_project/settings.py에서 DEBUG=False로 설정해야함
+- **이때 Docker같은 container를 사용할 경우, static file을 불어오지 못함**[(참고)](https://github.com/Microsoft/python-sample-vscode-django-tutorial/issues/13)
+---  
+2. static file 사용
+- 먼저 다음을 web_project/urls.py에 다음을 추가
+```
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+
+urlpatterns += staticfiles_urlpatterns()
+
+```
+- *staticfile_urlpatterns*는 helper function으로 standard static files의 url patterns을 return해주는 함수  
+- hello 밑에 static 폴더를 만들고 안에 다시 app 이름과 같은 서브폴더를 만들어줌
+- **같은 프로젝트에 여러 app을 사용하기 때문에 확실히 해줄 필요**  

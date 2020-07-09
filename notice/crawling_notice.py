@@ -30,4 +30,20 @@ def get_notice(url):
             date = notices.select_one('tr:nth-child(' + str(child) + ') > td:nth-child(2)').text
         except:
             date = ""
-        Notice( notice = title, date = date).save()
+
+        try:
+            original_notice = Notice.objects.get(pk=child)
+            original_title = original_notice.notice
+            orignial_date = original_notice.date
+            if(title == original_title):
+                continue
+            else:
+                original_notice.notice = title
+                orignial_notice.date = date
+                original_notice.save()
+        except:
+            new_notice = Notice()
+            new_notice.notice = title
+            new_notice.date = date
+            new_notice.id = child
+            new_notice.save()

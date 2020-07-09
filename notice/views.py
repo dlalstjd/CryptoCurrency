@@ -14,6 +14,7 @@ from notice import crawling_notice
 # Create your views here!
 class UpbitListView(ListView):
     
+    #Notice.objects.all().delete()
     url = 'https://upbit.com/service_center/notice'
     crawling_notice.get_notice(url)
     #model = Notice

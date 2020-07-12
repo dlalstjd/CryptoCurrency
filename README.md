@@ -271,11 +271,16 @@ def self_introduction(request):
 1. static files  
 - pieces of content that web app returns ex)이미지, JavaScript, CSS  
 - 더 참고할 [자료](https://docs.djangoproject.com/en/2.1/howto/static-files/)  
-- web_project/settings.py에서 DEBUG=False로 설정해야함
+- web_project/settings.py에서 **DEBUG=False**로 설정해야함
 - **이때 Docker같은 container를 사용할 경우, static file을 불어오지 못함**[(참고)](https://github.com/Microsoft/python-sample-vscode-django-tutorial/issues/13)
 ---  
 2. static file 사용
-- 먼저 다음을 web_project/urls.py에 다음을 추가
+- 먼저 web_project/settings.py 안에 INSTALLED_APPS에 app이름 추가  
+```
+'hello'
+```  
+- **이렇게 함으로 static file을 찾을 수 있게 해줌**
+- 다음 web_project/urls.py에 다음을 추가
 ```
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
@@ -284,4 +289,113 @@ urlpatterns += staticfiles_urlpatterns()
 ```
 - *staticfile_urlpatterns*는 helper function으로 standard static files의 url patterns을 return해주는 함수  
 - hello 밑에 static 폴더를 만들고 안에 다시 app 이름과 같은 서브폴더를 만들어줌
-- **같은 프로젝트에 여러 app을 사용하기 때문에 확실히 해줄 필요**  
+- **같은 프로젝트에 여러 app을 사용하기 때문에 확실히 해줄 필요!!!**  
+
+- static/hello 밑에 [css 파일](https://github.com/dlalstjd/Hexlant/blob/master/web_project/hello/static/hello/site.css) 만들어줌,,
+- 안드로이드 스튜이도 xml파일 처럼 web을 꾸며준다고 생각하면 쉬울듯  
+- templates/hello/hello_there.html 수정  
+```
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Hello, Django</title>
+        {% load static %}
+        <link rel="stylesheet" type="text/css" href="{% static 'hello/site.css' %}" />
+    </head>
+    <body>
+        <span class="message">Hello there, {{ name }}!</span> It's {{ date | date:"l, d F, Y" }} at {{ date | time:"H:i:s" }}.
+    </body>
+</html>
+```
+- {% load static %} tag는 이 부분에서 static file을 사용하겠다는 선언으로 생각하면 될 듯  
+- {% static ~~ %}에서 해당 static file의 url을 생성해서 묶어주는 것,,  
+---  
+3. collectstatic  
+- collect all the static files from your app into a single folder..  
+- ~~사실 왜 하는지는 잘 모르게따이~~  
+- 먼저 web_project/settings.py에 추가  
+```
+STATIC_ROOT = os.path.join(BASE_DIR, 'static collected')
+```
+- 실행 command  
+
+```  
+python manage.py collectstatic
+```
+- **static file을 수정하거나 server 돌리기 전에 습관처럼 하란다**
+---
+4. Base page & Extended page  
+- base page는 여러 page에서 공통적으로 사용하는 view를 정의해놓은 page, ~~parent class같은 느낌~~  
+- 여기서는 [layout.html](https://github.com/dlalstjd/Hexlant/blob/master/web_project/hello/templates/hello/layout.html)을 base page로 사용함  
+- 사용하려면 먼저 code sinnpet을 설정해줘야함  
+```
+#vscode를 사용함  
+오른쪽 상단에 tool bar에서 파일 >> 기본설정 >> 사용자 코드 조작 >> html 클릭  
+#이렇게 하면 html.json 파일이 만들어짐  
+#다음 내용 추가  
+"Django Tutorial: template extending layout.html": {
+    "prefix": "djextlayout",
+    "body": [
+        "{% extends \"hello/layout.html\" %}",
+        "{% block title %}",
+        "$0",
+        "{% endblock %}",
+        "{% block content %}",
+        "{% endblock %}"
+    ],
+
+    "description": "Boilerplate template that extends layout.html"
+},
+```
+- 이렇게 하면 다른 html 파일에서 dj만 쳐도 자동완성됨ㅎ  개꿀  
+
+<br>
+
+- 이렇게 만든 base page로 extended page를 만들어 보자  
+- templates/hello 밑에 home.html을 만들어준 뒤 dj만 치면 나오는 걸로 자동완성 해줌  
+- 여기서 위에서 추가한 것처럼 {%block `<name>`} & {%endblock %}으로 block이 형성됨  
+- title block안에 넣는 내용이 title이 되는 방식!!  
+---
+5. database를 사용해보자  
+- Django에서는 **models.py**로 DB를 다룸!  
+- DB object, 즉 table을 다룬다고 생각하면 됨  
+- models.py에서 사용하고자 하는 data의 형태(model)을 정의해놓은 뒤, migration시켜주면 sql을 사용하지 않고도 query를 다룰 수 있는 방식.  
+
+<br>
+
+- 간단한 실험  
+- 처음에는 잘 이해가 안돼 model과는 전혀 상관없는 print를 넣고 migration해봤다.  
+![0](./images/models.PNG)  
+- 그러고 migration해봤다  
+```
+python manage.py makemigrations  
+
+python manage.py migrate  
+```  
+- 결과!
+![2](./images/gam..PNG)  
+
+![3](./images/models_modify.PNG)  
+- 실행시켜보니 test가 출력되는 걸 확인했고  
+- No migrations to apply가 떴다.  아마 적용할 model rule이 없어서 그런가 보다  
+
+<br>  
+
+- models.py에 model만들기 [참고](https://docs.djangoproject.com/en/2.1/ref/models/fields/) 
+- page에서 Log를 보내서 보낸 Log를 저장해보자  
+
+```
+class LogMessage(models.Model):
+    message = models.CharField(max_length=300)
+    log_date = models.DateTimeField("date logged")
+
+    중략,,  
+```  
+- message는 맥스 길이가 300인 문자열, log_date는 datetime이라는 형식으로 model을 만든다  
+- 이후 migration!  
+![4](./images/after.PNG)  
+- 아까와 다르게 뭔가 적용된 걸 확인할 수 있다~!!~!  
+- SQLite browser로 DB에 들어있는 data를 확인  
+![5](./images/db.PNG)  
+- 형식과 내용도 잘 저장해준다ㅋㅎㅋ  

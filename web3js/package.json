@@ -1,0 +1,15 @@
+{
+  "name": "web3js",
+  "version": "1.0.0",
+  "description": "web3 security test",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "ethereumjs-wallet": "^1.0.0",
+    "web3": "^1.2.9"
+  }
+}

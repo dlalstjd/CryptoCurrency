@@ -2,14 +2,18 @@
   "name": "web3js",
   "version": "1.0.0",
   "description": "web3 security test",
-  "main": "index.js",
+  "main": "security_test.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "type": "module",
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bip39": "^3.0.2",
+    "ethereumjs-tx": "^2.1.2",
     "ethereumjs-wallet": "^1.0.0",
+    "requirejs": "^2.3.6",
     "web3": "^1.2.9"
   }
 }

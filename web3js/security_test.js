@@ -1,6 +1,8 @@
 import * as generator from "./generateAddress.js"
+import * as sender from "./sendTx.js"
 import Web3 from 'web3'
 import _Tx from 'ethereumjs-tx'
+import * as SSS from './SSS.js'
 
 //console.log(Web3)
 
@@ -11,35 +13,24 @@ const web3 = new Web3(new Web3.providers.HttpProvider(url));
 
 const mnemonic = generator.generateMnemonic()
 const privateKey = generator.generatePrivateKey(mnemonic)
+
+console.log(web3.utils.toHex(privateKey).toString())
+
+const n = 10
+const m = 4
+const shares = SSS.split_secret(privateKey, n, m)
 //console.log( "generateAddress.js pirvate key result: " + privateKey )
 
-const publicKey = web3.utils.toHex( generator.derivePublicKey(privateKey) ).toString()
-const address = web3.utils.toHex( generator.deriveAddress(publicKey) ).toString()
+//const publicKey = web3.utils.toHex( generator.derivePublicKey(privateKey) ).toString()
+const publicKey = generator.derivePublicKey(privateKey)
+//const address = web3.utils.toHex( generator.deriveAddress(publicKey) ).toString()
+const address = generator.deriveAddress(publicKey)
 //console.log( "deriveed address from keccak256 and public key from above private key: "+ address )
+//const account = web3.eth.accounts.privateKeyToAccount(web3.utils.toHex(privateKey).toString())
 
 
-const account = web3.eth.accounts.privateKeyToAccount(web3.utils.toHex(privateKey).toString())
-
-//const Wallet = web3.eth.accounts.wallet.create();
-//Wallet.add(account)
-
-const { Transaction : Tx } = _Tx
-
-const rawTransaction = {
-  from: "0x4f8D6BE7DD4FebDbf8AC3a7c582d5897C1422B32",
-  to: "0x743376fd2a693723A60942D0b4B2F1765ea1Dbb0",
-  value: web3.utils.toHex(web3.utils.toWei('0.001', 'ether')),
-  gasLimit: web3.utils.toHex(21000),
-  gasPrice: web3.utils.toHex(50e9)
-};
-
-var tx = new Tx(rawTransaction, { chain: 'ropsten', hardfork: 'petersburg' }, )
-tx.sign(privateKey)
-
-const serializedTx = tx.serialize()
-const raw = '0x' + serializedTx.toString('hex')
-
-web3.eth.sendSignedTransaction( raw, (err, txHash) => {
-    console.log('err:', err, 'txHash: ', txHash)
-})
+const reconstructed = SSS.reconstruct_secret( SSS.generateRandomShare(shares, n), m )
+if( reconstructed !== ""){
+  sender.sendTx(address, "0x743376fd2a693723A60942D0b4B2F1765ea1Dbb0", '0.001', reconstructed)
+}
 

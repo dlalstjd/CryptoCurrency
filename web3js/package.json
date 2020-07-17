@@ -14,6 +14,7 @@
     "ethereumjs-tx": "^2.1.2",
     "ethereumjs-wallet": "^1.0.0",
     "requirejs": "^2.3.6",
+    "shamirs-secret-sharing": "^1.0.1",
     "web3": "^1.2.9"
   }
 }

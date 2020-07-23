@@ -14,8 +14,6 @@ const web3 = new Web3(new Web3.providers.HttpProvider(url));
 const mnemonic = generator.generateMnemonic()
 const privateKey = generator.generatePrivateKey(mnemonic)
 
-console.log(web3.utils.toHex(privateKey).toString())
-
 const n = 10
 const m = 4
 const shares = SSS.split_secret(privateKey, n, m)
@@ -28,8 +26,8 @@ const address = generator.deriveAddress(publicKey)
 //console.log( "deriveed address from keccak256 and public key from above private key: "+ address )
 //const account = web3.eth.accounts.privateKeyToAccount(web3.utils.toHex(privateKey).toString())
 
-
 const reconstructed = SSS.reconstruct_secret( SSS.generateRandomShare(shares, n), m )
+
 if( reconstructed !== ""){
   sender.sendTx(address, "0x743376fd2a693723A60942D0b4B2F1765ea1Dbb0", '0.001', reconstructed)
 }

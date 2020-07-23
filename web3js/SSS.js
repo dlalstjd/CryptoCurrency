@@ -14,7 +14,7 @@ function generateRandomNumber(max, min){
 // generate random shares
 export function generateRandomShare(shares, n){
     var random = generateRandomNumber(n, 1)
-    console.log(random)
+    //console.log(random)
     var random_shares = []
     for( var step = 0; step < random; step++){
         if( random + step >= n )
@@ -22,7 +22,7 @@ export function generateRandomShare(shares, n){
         else
             random_shares.push(shares[(random+step)])
     }
-    console.log(random_shares)
+    //console.log(random_shares)
     return random_shares
 }
 

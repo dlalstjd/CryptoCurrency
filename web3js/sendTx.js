@@ -22,9 +22,13 @@ export function sendTx(fromAddress, toAddress, value, privateKey){
         };
   
         var tx = new Tx(rawTransaction, { chain: 'ropsten', hardfork: 'petersburg' }, )
+        console.log(tx.raw)
         tx.sign(privateKey)
+        //console.log(tx)
 
         const serializedTx = tx.serialize()
+        //console.log(serializedTx)
+
         const raw = '0x' + serializedTx.toString('hex')
 
         web3.eth.sendSignedTransaction( raw, (err, txHash) => {

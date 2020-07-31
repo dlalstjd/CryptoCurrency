@@ -4,6 +4,7 @@ import sss from 'shamirs-secret-sharing'
 export function split_secret(_secret, n, m){
     const secret = Buffer.from(_secret)
     const shares = sss.split(secret, { shares: n, threshold: m })
+    //console.log(shares)
     return shares
 }
 

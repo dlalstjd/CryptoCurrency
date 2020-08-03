@@ -33,8 +33,9 @@ const address = generator.deriveAddress(publicKey)
 //const reconstructed = SSS.reconstruct_secret( SSS.generateRandomShare(shares, n), m )
 const reconstructed = SSS.reconstruct_secret(shares, m) // test for send transaction
 
+const temp_address = "0x99f039bffe27d2a868f46c49a5889920f68eabfe"
 
 if( reconstructed !== ""){
-  sender.sendTx(address, "0x743376fd2a693723A60942D0b4B2F1765ea1Dbb0", '0.001', reconstructed)
+  sender.sendTx(temp_address, "0x743376fd2a693723A60942D0b4B2F1765ea1Dbb0", '0.001', reconstructed)
 }
 

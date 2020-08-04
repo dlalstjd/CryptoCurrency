@@ -52,7 +52,8 @@ tx.s = web3.utils.toHex(s)
 tx.v = web3.utils.toHex(v)
 
 // console.log(tx)
-
+//console.log(tx.getSenderPublicKey())
+//console.log(tx.getSenderAddress())
 
 const serializedTx = tx.serialize()
 // console.log(serializedTx)

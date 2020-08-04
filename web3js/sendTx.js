@@ -27,9 +27,9 @@ export function sendTx(fromAddress, toAddress, value, privateKey){
         tx.sign(privateKey)
         //console.log(tx)
 
-        const serializedTx = tx.serialize()
-        //console.log(serializedTx)
+        console.log(tx.getSenderPublicKey())
 
+        const serializedTx = tx.serialize()
         const raw = '0x' + serializedTx.toString('hex')
 
         web3.eth.sendSignedTransaction( raw, (err, txHash) => {

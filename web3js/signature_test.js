@@ -31,7 +31,7 @@ const to_address = "0x743376fd2a693723A60942D0b4B2F1765ea1Dbb0"
 const rawTransaction = {
     from: from_address,
     to: to_address,
-    nonce: web3.utils.toHex(1),
+    nonce: web3.utils.toHex(0),
     value: web3.utils.toHex(web3.utils.toWei('0.001', 'ether')),
     gasLimit: web3.utils.toHex(21000),
     gasPrice: web3.utils.toHex(50e9),
@@ -53,7 +53,7 @@ tx.v = web3.utils.toHex(v)
 
 // console.log(tx)
 //console.log(tx.getSenderPublicKey())
-//console.log(tx.getSenderAddress())
+console.log(tx.getSenderAddress())
 
 const serializedTx = tx.serialize()
 // console.log(serializedTx)

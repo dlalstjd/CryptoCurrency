@@ -15,8 +15,8 @@ export function sendTx(fromAddress, toAddress, value, privateKey){
         const rawTransaction = {
             from: fromAddress,
             to: toAddress,
-            nonce: accountNonce,
-            //nonce: web3.utils.toHex(1),
+            //nonce: accountNonce,
+            nonce: web3.utils.toHex(0),
             value: web3.utils.toHex(web3.utils.toWei(value, 'ether')),
             gasLimit: web3.utils.toHex(21000),
             gasPrice: web3.utils.toHex(50e9)

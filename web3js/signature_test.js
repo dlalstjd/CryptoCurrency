@@ -28,9 +28,9 @@ const rawTransaction = {
 var tx = new Tx(rawTransaction, { chain: 'ropsten', hardfork: 'petersburg' }, )
 //console.log(keccak(rlp.encode(tx.raw)))
 
-const r = "39340257175986987073618105650307502007452869966406617837772634668710457982396"
-const s = "1524446563513001298301159463179785138925094075055157268367344011822285943545"
-const v = 41
+const r = "69650308753487167192836966056962971656287853277336967408867791675286926163787"
+const s = "42303693575951349260611200871303791782492522539662950695646327160725981135688"
+const v = 42
 
 tx.r = web3.utils.toHex(r)
 tx.s = web3.utils.toHex(s)
@@ -52,7 +52,7 @@ const raw = '0x' + serializedTx.toString('hex')
 //-----------------------------------------------------------------------------------------------//
 // private key reconstruction from wi
 
-const x = "DE9A50283AE5E0BB9B1B1F3C1A9A3D15AFE6B2FD9302F0C4EC9893EB696D914C"
+const x = "77ABB974B102656859B78584C31F4F8FD33861F2E1DE48AE9C2692B1E8B445CA"
 
 tx.sign(Uint8Array.from(Buffer.from(x, 'hex')))
 //console.log(tx.r)

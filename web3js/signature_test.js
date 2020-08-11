@@ -19,7 +19,7 @@ const to_address = "0x743376fd2a693723A60942D0b4B2F1765ea1Dbb0"
 const rawTransaction = {
     from: from_address,
     to: to_address,
-    nonce: web3.utils.toHex(1),
+    nonce: web3.utils.toHex(0),
     value: web3.utils.toHex(web3.utils.toWei('0.001', 'ether')),
     gasLimit: web3.utils.toHex(21000),
     gasPrice: web3.utils.toHex(1000000000),//50e9
@@ -27,9 +27,9 @@ const rawTransaction = {
 
 var tx = new Tx(rawTransaction, { chain: 'ropsten', hardfork: 'petersburg' }, )
 //console.log(keccak(rlp.encode(tx.raw)))
-/*
-const r = "50595355918819243410031121052044548209002512062447742184422428765482868356793"
-const s = "55171353374886157105762314656588687649239061634763395144694786161377614195084"
+
+const r = "39340257175986987073618105650307502007452869966406617837772634668710457982396"
+const s = "1524446563513001298301159463179785138925094075055157268367344011822285943545"
 const v = 41
 
 tx.r = web3.utils.toHex(r)
@@ -37,23 +37,22 @@ tx.s = web3.utils.toHex(s)
 tx.v = web3.utils.toHex(v)
 
 //console.log(tx.raw)
-//console.log(tx.getSenderAddress())
+console.log(tx.getSenderAddress())
 const serializedTx = tx.serialize()
 // console.log(serializedTx)
 
 const raw = '0x' + serializedTx.toString('hex')
 //console.log(raw);
 
-//console.log(txDecoder.decodeTx(tx))
-web3.eth.sendSignedTransaction( raw, (err, txHash) => {
-    console.log('err:', err, 'txHash: ', txHash)
-})
-*/
+//web3.eth.sendSignedTransaction( raw, (err, txHash) => {
+//    console.log('err:', err, 'txHash: ', txHash)
+//})
 
+/*
 //-----------------------------------------------------------------------------------------------//
 // private key reconstruction from wi
 
-const x = "9B49E0BD55968FABBEBCC10EF9E1A60D3A3547C6A656912B4D3DDF9C6386D299"
+const x = "DE9A50283AE5E0BB9B1B1F3C1A9A3D15AFE6B2FD9302F0C4EC9893EB696D914C"
 
 tx.sign(Uint8Array.from(Buffer.from(x, 'hex')))
 //console.log(tx.r)
@@ -66,6 +65,7 @@ const serializedTx = tx.serialize()
 const raw = '0x' + serializedTx.toString('hex')
 
 //console.log(txDecoder.decodeTx(tx))
-web3.eth.sendSignedTransaction( raw, (err, txHash) => {
-    console.log('err:', err, 'txHash: ', txHash)
-})
+//web3.eth.sendSignedTransaction( raw, (err, txHash) => {
+//    console.log('err:', err, 'txHash: ', txHash)
+//})
+*/

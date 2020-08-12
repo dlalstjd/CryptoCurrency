@@ -11,6 +11,8 @@
   "license": "ISC",
   "dependencies": {
     "bip39": "^3.0.2",
+    "bitcore-insight": "^1.0.1",
+    "bitcore-lib": "^8.22.0",
     "ethereum-tx-decoder": "^3.0.0",
     "ethereumjs-tx": "^2.1.2",
     "ethereumjs-util": "^7.0.3",

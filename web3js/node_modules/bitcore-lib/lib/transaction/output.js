@@ -23,7 +23,7 @@ function Output(args) {
     } else {
       var script;
       if (_.isString(args.script) && JSUtil.isHexa(args.script)) {
-        script = Buffer.from(args.script, 'hex');
+        script = new buffer.Buffer(args.script, 'hex');
       } else {
         script = args.script;
       }
@@ -149,7 +149,7 @@ Output.fromBufferReader = function(br) {
   if (size !== 0) {
     obj.script = br.read(size);
   } else {
-    obj.script = Buffer.from([]);
+    obj.script = new buffer.Buffer([]);
   }
   return new Output(obj);
 };

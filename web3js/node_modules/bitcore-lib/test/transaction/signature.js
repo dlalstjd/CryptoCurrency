@@ -104,7 +104,7 @@ describe('TransactionSignature', function() {
     it('can deserialize when signature is a buffer', function() {
       var signature = getSignatureFromTransaction();
       var serialized = signature.toObject();
-      serialized.signature = Buffer.from(serialized.signature, 'hex');
+      serialized.signature = new Buffer(serialized.signature, 'hex');
       expect(TransactionSignature.fromObject(serialized).toObject()).to.deep.equal(signature.toObject());
     });
 

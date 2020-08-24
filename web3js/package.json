@@ -11,6 +11,8 @@
   "license": "ISC",
   "dependencies": {
     "bip39": "^3.0.2",
+    "bitcoinjs-lib": "^5.1.10",
+    "bitcore-explorers": "^1.0.1",
     "bitcore-insight": "^1.0.1",
     "bitcore-lib": "^8.22.0",
     "ethereum-tx-decoder": "^3.0.0",
@@ -21,6 +23,7 @@
     "requirejs": "^2.3.6",
     "rlp": "^2.2.6",
     "secp256k1": "^4.0.2",
+    "secure-random": "^1.1.2",
     "sha256": "^0.2.0",
     "shamirs-secret-sharing": "^1.0.1",
     "web3": "^1.2.9"

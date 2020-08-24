@@ -7,7 +7,6 @@ import sha256 from 'js-sha256'
 import ripemd160 from 'ripemd160'
 import bitcore from 'bitcore-lib'
 
-
 const { hdkey } = pkg
 const { ec } = EC
 const web3 = new Web3()
@@ -26,8 +25,13 @@ export function generateSeed(mnemonic){
 // generate "a" private key
 // if wanna make more private key, modifiy this function
 export function generatePrivateKey(mnemonic){
-    const { hdkey } = pkg
     const seed = generateSeed(mnemonic).toString()
+    /*
+    const hash = new bitcore.crypto.Hash.sha256(Buffer.from(seed))
+    const bn = new bitcore.crypto.BN.fromBuffer(hash)
+    const privateKey = new bitcore.PrivateKey(bn)
+    */
+    
     const rootKey = hdkey.fromMasterSeed(seed)
     //hd address
     const hardenedKey = rootKey.derivePath("m/44' /60' /0' /0'")
@@ -35,28 +39,27 @@ export function generatePrivateKey(mnemonic){
     const wallet = childKey.getWallet()
     const privateKey = wallet.getPrivateKey()
     return privateKey
-
     /* create private key by bitcore
     const privateKey = new bitcore.PrivateKey()
     console.log(privateKey)
     */
 }
 
-// generate public key that is uncompressed
+// generate public key that is "uncompressed"
 export function derivePublicKey(privateKey){
     const ecdsa = new ec('secp256k1')
     const keys = ecdsa.keyFromPrivate(privateKey)
-    const publicKey = keys.getPublic('hex')
-    return publicKey
+    const publicKey = keys.getPublic('hex').substring(2, 67)
+    return "03"+publicKey
 }
 
 // generate address from public key ( double hashing )
 export function deriveAddress(publicKey){
     const hash = sha256(Buffer.from(publicKey, 'hex'))
-    const publickeyHash = new ripemd160().update(Buffer.from(hash, 'hex')).digest()
-    const publicKeyHash = web3.utils.toHex(Buffer.from(publickeyHash, 'hex')).toString().substring(2)
-    // 1. add prefix "00"( means bitcoin address ) in public key hash
-    const prefixPublicKey = Buffer.from("00" + publicKeyHash, 'hex')
+    const publicKeyHash = new ripemd160().update(Buffer.from(hash, 'hex')).digest()
+    // 1. add prefix "6F"( means bitcoin TESTNET address ) in public key hash
+    // For mainnet, should add prefix "00"
+    const prefixPublicKey = Buffer.from("6F" + publicKeyHash.toString('hex'), 'hex')
     // 2. create SHA256 hash double time
     const onceHash = sha256(prefixPublicKey)
     const doubleHash = sha256(Buffer.from(onceHash, 'hex'))
@@ -66,7 +69,6 @@ export function deriveAddress(publicKey){
     const prefixPublicKeyChecksum = prefixPublicKey.toString('hex') + checksum
     // 5. base 58 check encode => address
     const address = bs58.encode(Buffer.from(prefixPublicKeyChecksum, 'hex'))
-    //console.log(bs58.decode(address))
     return address
 }
 
@@ -95,8 +97,33 @@ export function deriveAddressFromWIF(privateKeyWIF){
     return addressFromWIF
 }
 
+
+/* Other way : bitcoinjs-lib
+const testnet = bitcoin.networks.testnet
+const keypair = bitcoin.ECPair.makeRandom({network:testnet}) // _D: private key, _Q: public key, option: compressed?
+const prikey = keypair.privateKey
+const pubkey = keypair.publicKey
+const w = keypair.toWIF()
+//const addr = keypair.getAddress()
+//const pk = keypair.toWIF()
+*/
+
+
+
 /*
-// encode hex private key t0 wif
-const wif = bs58.encode(privateKey)
-console.log(wif)
+const mnemonic = generator.generateMnemonic()
+const tmpPrivateKey = generator.generatePrivateKey(mnemonic)
+const tmpPublicKey = generator.derivePublicKey(tmpPrivateKey)
+console.log(ecc.pointFromScalar(tmpPrivateKey, 0))
+console.log(tmpPublicKey)
+//const wif = generator.deriveWIF(tmpPrivateKey)
+//const fromAddress = generator.deriveAddress(tmpPublicKey)
+//const pk = WIF.encode(testnet.wif, tmpPrivateKey, true)
+*/
+
+
+/*
+const keypair = bitcoin.ECPair.makeRandom({ testnet })
+const pubkey = keypair.publicKey
+const addressObject = bitcoin.payments.p2pkh( {pubkey, testnet} )
 */

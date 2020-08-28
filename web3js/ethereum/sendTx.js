@@ -9,25 +9,21 @@ const { Transaction : Tx } = _Tx
 
 // send transaction
 export function sendTx(fromAddress, toAddress, value, privateKey){
+    // build ethereum transaction
     web3.utils.toHex(web3.eth.getTransactionCount(fromAddress, (err, count) => {
         const accountNonce = web3.utils.toHex(count+1)
         //transaction object
         const rawTransaction = {
             from: fromAddress,
             to: toAddress,
-            //nonce: accountNonce,
-            nonce: web3.utils.toHex(0),
+            nonce: accountNonce,
             value: web3.utils.toHex(web3.utils.toWei(value, 'ether')),
             gasLimit: web3.utils.toHex(21000),
             gasPrice: web3.utils.toHex(50e9)
         };
   
         var tx = new Tx(rawTransaction, { chain: 'ropsten', hardfork: 'petersburg' }, )
-        console.log(tx.raw)
         tx.sign(privateKey)
-        //console.log(tx)
-
-        console.log(tx.getSenderPublicKey())
 
         const serializedTx = tx.serialize()
         const raw = '0x' + serializedTx.toString('hex')

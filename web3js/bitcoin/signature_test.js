@@ -1,8 +1,6 @@
 import * as generator from './KeyGenerator.js'
 import * as tx from './SendTx.js'
-import bitcoin from 'bitcoinjs-lib'
 import Web3 from 'web3'
-const testnet = bitcoin.networks.testnet
 const web3 = new Web3()
 
 const privateKey = Buffer.from("DCDB54465BC08AD4E03242999D6E61C9A4CF216F9E70C23E4262866E85E209B7", 'hex')
@@ -14,7 +12,6 @@ const prevTx = "02000000000101b6f47bc9bf94f98f2b5928ab1682a264efea45a2d4f18466b8
 const amount = 	1120000
 const minerfee = 20000
 const toAddress = "mv4rnyY3Su5gjcDNzbMLKBQkBicCtHUtFB"  // send back address mv4rnyY3Su5gjcDNzbMLKBQkBicCtHUtFB
-
 /*
 //msg: 18c4fa3fa140797e2b4047c03628009273e497e09b2874221e20d27cca9e1609
 //r: "71266443417005326348767284092020604920373252545233994831518495093345162990173"

@@ -11,7 +11,6 @@ const { hdkey } = pkg
 const { ec } = EC
 const web3 = new Web3()
 
-
 // generatae a mnemonic
 export function generateMnemonic(){
     return BIP39.generateMnemonic()
@@ -45,11 +44,12 @@ export function generatePrivateKey(mnemonic){
     */
 }
 
-// generate public key that is "uncompressed"
+// generate public key
+// uncompress sec // compressed sec
 export function derivePublicKey(privateKey){
     const ecdsa = new ec('secp256k1')
     const keys = ecdsa.keyFromPrivate(privateKey)
-    const publicKey = keys.getPublic('hex').substring(2, 67)
+    const publicKey = keys.getPublic('hex').substring(2, 66)
     return "03"+publicKey
 }
 

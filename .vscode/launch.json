@@ -10,7 +10,7 @@
             //"type": "python",
             "name" : "web3js: security_test",
             "request": "launch",
-            "program": "${workspaceFolder}\\web3js\\security_test.js",
+            "program": "${workspaceFolder}\\tss\\ripple\\getTx.js",
             //"args": [
             //   "runserver",
             //    "--noreload"

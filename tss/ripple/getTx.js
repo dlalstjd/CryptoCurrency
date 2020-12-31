@@ -2,7 +2,9 @@ const { RippleAPI } = require('ripple-lib');
 const binaryCodec = require('ripple-binary-codec');
 const BN = require('bn.js');
 const hashjs = require('hash.js');
-const utils = require('minimalistic-crypto-utils');
+const EC = require('elliptic').ec;
+const ec = new EC('secp256k1');
+
 
 const api = new RippleAPI({
 	  server: 'wss://s.altnet.rippletest.net:51233' // XRP Test Net
@@ -37,35 +39,27 @@ async function run() {
   	const prepared = await api.preparePayment(fromAddress, payment, {
 		maxLedgerVersionOffset: 5
 	});
-
-	
 	const keypair = { privateKey: fromSecret,
-			  publicKey:  fromPubKey
+		publicKey:  fromPubKey
 	}
-
 	const { signedTransaction } = api.sign(prepared.txJSON, keypair);
-	//console.log( signedTransaction );
-	//const res =  await api.submit(signedTransaction);
 
 	const tx = JSON.parse(prepared.txJSON);
-
 	const txToSignAndEncode = Object.assign({}, tx);
 	txToSignAndEncode.SigningPubKey = fromPubKey;
+	console.log(txToSignAndEncode);
+	const signingData = binaryCodec.encodeForSigning(txToSignAndEncode);
+	const hash = ec._truncateToN(new BN(hashjs.sha512().update(signingData).digest().slice(0, 32), 16));
 	
-	//const signingData = binaryCodec.encodeForSigning(tx);
-	const signingData = "5354580012000022800000002400CF67D4201B00CFE2D961400000000098968068400000000000000C73210349E4AAE8AA152131F5ED3CD2388103C796EE329D2B90CD6200D7893CE6E0B7E481142CCCE967D37287DB8CB629FA23470616AD00BB6C831413CFAA99A4F29526C28097758305F354F8AF0F04";
-	
-	//console.log(signingData);
-	//const msg = new BN(signingData, 16).toArray(null, signingData.length / 2);
+	/*
 	const hash = hashjs.sha512().update(signingData).digest().slice(0, 32);
-
-	//console.log(hash[0].toString(16));
-	var hexhash = "";
+	var hash_hex = "";
 	for( var i = 0; i < hash.length; i++ ){
-		hexhash += hash[i].toString(16);
+		hash_hex += hash[i].toString(16);
 	}
-	
-	console.log(hexhash);
+	console.log(hash_hex);
+	*/
 
+	//console.log(hash);
 	process.exit(0);
 }

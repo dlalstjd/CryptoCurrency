@@ -83,17 +83,18 @@ async function run() {
 	    	destination: {
 		 	address: toAddress,
 		        amount: {
-				value: '10.00',
+				value: '1.00',
 			    	currency: 'XRP'
 			}
 		}
 	};
 
   	const prepared = await api.preparePayment(fromAddress, payment, {
-		maxLedgerVersionOffset: 5
+		maxLedgerVersionOffset: 100000000000
 	});
 	
 	const tx = JSON.parse(prepared.txJSON);
+	tx.Fee = '100';
 	const txToSignAndEncode = Object.assign({}, tx);
 	txToSignAndEncode.SigningPubKey = fromPubKey;
 
@@ -108,14 +109,16 @@ async function run() {
 	}).join('');
 
 	txToSignAndEncode.TxnSignature = signature;
-	txToSignAndEncode.LastLedgerSequence = 13651550;
+	txToSignAndEncode.LastLedgerSequence = 13761449;
 
 	console.log(txToSignAndEncode);
 	
 	const serialized = binaryCodec.encode(txToSignAndEncode);
 	console.log(serialized);
 
-	//const res2 = await api.submit(serialized);
+	const res2 = await api.submit(serialized);
+
+	console.log(res2);
 
 	process.exit(0);
 }

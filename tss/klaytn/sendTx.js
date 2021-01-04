@@ -2,7 +2,7 @@ const Nat = require('eth-lib/lib/nat')
 const Caver = require('caver-js')
 const caver = new Caver('https://api.baobab.klaytn.net:8651/')
 
-async function getTx() {
+async function sendTx() {
     const v = Number(process.argv[2]);
     const r = '0x' + process.argv[3].toString(16);
     const s = '0x' + process.argv[4].toString(16);
@@ -22,7 +22,7 @@ async function getTx() {
 
     // Sign the transaction via caver.wallet.sign
     await valueTransfer.fillTransaction();
-    valueTransfer.tssSign('0x' + (Nat.toNumber(valueTransfer.chainId) * 2 + 35 + v).toString(16), s, r);
+    valueTransfer.tssSign('0x' + (Nat.toNumber(valueTransfer.chainId) * 2 + 35 + v).toString(16), r, s);
     console.log(valueTransfer);
 
     const rlpEncoded = valueTransfer.getRLPEncoding();
@@ -30,4 +30,4 @@ async function getTx() {
     console.log(receipt)
 }
 
-getTx();
+sendTx();

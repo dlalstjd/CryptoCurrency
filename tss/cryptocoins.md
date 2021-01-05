@@ -2,7 +2,7 @@
 
 Research most crypto coins hash, address and signature algorithm.
 
-| No | Name | Type | Signging Alg | Curve | Hash | Address encoding | Address hash | ref. |   |-----|------------------|------------------------------|--------------------------------------|-------------------------------------|---------------------|--------------------|----------------|----------------------------------------------------------------------------------------------------------|----------------|-------|--------------------------------------------------------|---------|-----------------------------------------------------------------------------------------------------------------------------------|
+| No | Name | Type | Signging Alg | Curve | Hash | Address encoding | Address hash | ref. |
 | 1 | Bitcoin | UXTO | ECDSA | secp256k1 | SHA-256 | base58, bech32 | SHA-256, RIPEMD-160 |  |
 | 2 | Ethereum | account | ECDSA | secp256k1 | Keccak-256 | none | last 20B of Keccak-256 |  |
 | 3 | XRP | account | ECDSA | secp256k1 | first half of SHA-512 | base58 with different alphabet | SHA-256, RIPEMD-160 |  |

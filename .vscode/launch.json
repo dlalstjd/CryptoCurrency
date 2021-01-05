@@ -8,7 +8,7 @@
         {
             //"name": "Python: Django",
             //"type": "python",
-            "name" : "web3js: security_test",
+            "name" : "tss: security_test",
             "request": "launch",
             "program": "${workspaceFolder}\\tss\\ripple\\getTx.js",
             //"args": [

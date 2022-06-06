@@ -31,7 +31,7 @@ chrono = "0.4"
 rust-crypto = "^0.2"
 criterion = "0.3"
 hex = "0.4"
-rocket = { version = "0.4.2", default-features = false }
+rocket = { version = "0.4.7", default-features = false }
 rocket_contrib = "0.4.2"
 reqwest = { version = "0.9", default-features = false }
 uuid = { version = "0.8", features = ["v4"] }

@@ -26,7 +26,7 @@ zk-paillier = { git = "https://github.com/KZen-networks/zk-paillier", tag = "v0.
 subtle = { version = "2" }
 serde = { version = "1.0", features = ["derive"] }
 zeroize = "0.10.1"
-libsecp256k1 = "0.3.2"
+libsecp256k1 = "0.5.0"
 chrono = "0.4"
 rust-crypto = "^0.2"
 criterion = "0.3"

@@ -15,7 +15,7 @@
     "bitcore-explorers": "^1.0.1",
     "bitcore-insight": "^1.0.1",
     "bitcore-lib": "^8.22.0",
-    "caver-js": "^1.5.5",
+    "caver-js": "^1.10.1",
     "ethereum-tx-decoder": "^3.0.0",
     "ethereumjs-tx": "^2.1.2",
     "ethereumjs-util": "^7.0.3",
